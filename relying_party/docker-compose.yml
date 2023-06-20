@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+
+  identity-exchanger:
+    hostname: identity-exchanger
+    container_name: identity-exchanger
+    restart: always
+    build:
+      context: identity-exchanger/oauth_server/.
+    environment:
+      - AUTHLIB_INSECURE_TRANSPORT=1
+    ports:
+      - "8000:8000"
+    volumes: 
+      - ./identity-exchanger/oauth_server:/app
