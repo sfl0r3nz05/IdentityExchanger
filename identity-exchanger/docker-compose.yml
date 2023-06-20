@@ -6,10 +6,12 @@ services:
     hostname: exchanger
     container_name: exchanger
     restart: always
-    build:  ./oauth_server
-    volumes:
-      - ./oauth_server/:/usr/src/app/
-    ports:
-      - 5000:5000
+    build: oauth_server/
     environment:
       - FLASK_APP=app.py
+    ports:
+      - "5000:5000"
+    volumes: 
+      - ./oauth_server:/app
+    networks:
+      - default

@@ -1,23 +1,6 @@
-# pull official base image
-FROM continuumio/miniconda3 
-
-# set work directory
-WORKDIR /usr/src/app
-
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# install apt system dependencies
-RUN apt-get update && apt-get install -y netcat
-
-# install dependencies
-RUN pip install --upgrade pip
-COPY ./prequirements.txt /usr/src/app/prequirements.txt
-RUN pip install -r prequirements.txt
-
-
-# copy project
-COPY . /usr/src/app/
-
-CMD ["python","-u", "/usr/src/app/app.py"]
+FROM python
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]

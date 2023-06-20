@@ -1,3 +1,4 @@
-*.sqlite
-*.pyc
-venv/*
+identity-exchanger/oauth_server/instance/
+identity-exchanger/oauth_server/__pycache__/
+identity-exchanger/oauth_server/website/__pycache__/
+identity-exchanger/oauth_server/website/__init__.py
