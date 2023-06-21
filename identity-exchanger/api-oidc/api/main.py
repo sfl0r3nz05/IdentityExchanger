@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 appConf = {
   "OAUTH2_CLIENT_ID": "user-password",
-  "OAUTH2_CLIENT_SECRET": "5zll6nnCzIvvM4O5qXnlnpBMgLNmzizc",
+  "OAUTH2_CLIENT_SECRET": "GAyHn4T4Q4HYUCoH4rWMmudjjw0Cahh1",
   "OAUTH2_ISSUER": "http://10.63.27.39:8080/realms/PASSWORD",
   "FLASK_SECRET": "ALongRandomlyGeneratedString",
   "FLASK_PORT": 3000
