@@ -13,3 +13,4 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
     command: 
       - start-dev
+      - --import-realm
