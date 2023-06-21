@@ -1,0 +1,8 @@
+flask
+flask_restful
+flask-cors
+crash
+crate
+pyopenssl
+authlib
+requests
