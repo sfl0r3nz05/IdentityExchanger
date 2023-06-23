@@ -19,5 +19,3 @@ services:
     command: 
       - start-dev
       - --import-realm
-    volumes:
-      - ./real-samples/realm-password.json:/opt/keycloak/data/import/realm.json
