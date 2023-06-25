@@ -6,19 +6,19 @@ networks:
          name: syntheticnet
 
 services:
-#  frontend:
-#    container_name: frontend
-#    hostname: frontend
-#    restart: always
-#    build: react-frontend/
-#    command: sh -c "npm i && npm start"
-#    ports:
-#      - 4000:4000
-#    working_dir: /app
-#    volumes:
-#      - ./react-frontend:/app
-#    environment:
-#      REACT_APP_PORT: "4000"
+  frontend:
+    container_name: frontend
+    hostname: frontend
+    restart: always
+    build: react-frontend/
+    command: sh -c "npm i && npm start"
+    ports:
+      - 4000:4000
+    working_dir: /app
+    volumes:
+      - ./react-frontend:/app
+    environment:
+      REACT_APP_PORT: "4000"
 
   backend:
     hostname: backend
