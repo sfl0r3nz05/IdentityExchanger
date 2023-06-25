@@ -1,16 +1,31 @@
 version: "3.8"
 
-services:
+networks:
+   default:
+      external:
+         name: syntheticnet
 
-  identity-exchanger:
-    hostname: identity-exchanger
-    container_name: identity-exchanger
+services:
+#  frontend:
+#    container_name: frontend
+#    hostname: frontend
+#    restart: always
+#    build: react-frontend/
+#    command: sh -c "npm i && npm start"
+#    ports:
+#      - 4000:4000
+#    working_dir: /app
+#    volumes:
+#      - ./react-frontend:/app
+#    environment:
+#      REACT_APP_PORT: "4000"
+
+  backend:
+    hostname: backend
+    container_name: backend
     restart: always
-    build:
-      context: identity-exchanger/oauth_server/.
-    environment:
-      - AUTHLIB_INSECURE_TRANSPORT=1
-    ports:
-      - "8000:8000"
+    build: flask-backend/
     volumes: 
-      - ./identity-exchanger/oauth_server:/app
+      - ./flask-backend:/app
+    ports:
+      - 3001:3001
