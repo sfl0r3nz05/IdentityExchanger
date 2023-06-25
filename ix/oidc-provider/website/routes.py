@@ -1,14 +1,14 @@
 import time
-from flask import Blueprint, request, session, url_for
+from flask import Blueprint, request, session
 from flask import render_template, redirect, jsonify
 from werkzeug.security import gen_salt
 from authlib.integrations.flask_oauth2 import current_token
 from authlib.oauth2 import OAuth2Error
 from .models import db, User, OAuth2Client
-from .oauth2 import authorization, require_oauth
+from .oauth2 import authorization, require_oauth, generate_user_info
 
 
-bp = Blueprint('home', __name__)
+bp = Blueprint('bp', __name__)
 
 
 def current_user():
@@ -16,10 +16,6 @@ def current_user():
         uid = session['id']
         return User.query.get(uid)
     return None
-
-
-def split_by_crlf(s):
-    return [v for v in s.splitlines() if v]
 
 
 @bp.route('/', methods=('GET', 'POST'))
@@ -32,24 +28,17 @@ def home():
             db.session.add(user)
             db.session.commit()
         session['id'] = user.id
-        # if user is not just to log in, but need to head back to the auth page, then go for it
-        next_page = request.args.get('next')
-        if next_page:
-            return redirect(next_page)
         return redirect('/')
     user = current_user()
     if user:
         clients = OAuth2Client.query.filter_by(user_id=user.id).all()
     else:
         clients = []
-
     return render_template('home.html', user=user, clients=clients)
 
 
-@bp.route('/logout')
-def logout():
-    del session['id']
-    return redirect('/')
+def split_by_crlf(s):
+    return [v for v in s.splitlines() if v]
 
 
 @bp.route('/create_client', methods=('GET', 'POST'))
@@ -59,16 +48,16 @@ def create_client():
         return redirect('/')
     if request.method == 'GET':
         return render_template('create_client.html')
-
-    client_id = gen_salt(24)
-    client_id_issued_at = int(time.time())
-    client = OAuth2Client(
-        client_id=client_id,
-        client_id_issued_at=client_id_issued_at,
-        user_id=user.id,
-    )
-
     form = request.form
+    client_id = gen_salt(24)
+    client = OAuth2Client(client_id=client_id, user_id=user.id)
+    # Mixin doesn't set the issue_at date
+    client.client_id_issued_at = int(time.time())
+    if client.token_endpoint_auth_method == 'none':
+        client.client_secret = ''
+    else:
+        client.client_secret = gen_salt(48)
+
     client_metadata = {
         "client_name": form["client_name"],
         "client_uri": form["client_uri"],
@@ -79,12 +68,6 @@ def create_client():
         "token_endpoint_auth_method": form["token_endpoint_auth_method"]
     }
     client.set_client_metadata(client_metadata)
-
-    if form['token_endpoint_auth_method'] == 'none':
-        client.client_secret = ''
-    else:
-        client.client_secret = gen_salt(48)
-
     db.session.add(client)
     db.session.commit()
     return redirect('/')
@@ -93,21 +76,33 @@ def create_client():
 @bp.route('/oauth/authorize', methods=['GET', 'POST'])
 def authorize():
     user = current_user()
-    # if user log status is not true (Auth server), then to log it in
-    if not user:
-        return redirect(url_for('home.home', next=request.url))
+    # TODO Login is required since we need to know the current resource owner.
+    # It can be done with a redirection to the login page, or a login
+    # form on this authorization page.
     if request.method == 'GET':
         try:
             grant = authorization.get_consent_grant(end_user=user)
+            client = grant.client
+            scope = client.get_allowed_scope(grant.request.scope)
+
+            # You may add a function to extract scope into a list of scopes
+            # with rich information, e.g.
+            # scopes = describe_scope(scope)  # returns [{'key': 'email', 'icon': '...'}]
         except OAuth2Error as error:
-            return error.error
-        return render_template('authorize.html', user=user, grant=grant)
+            return jsonify(dict(error.get_body()))
+        return render_template(
+                'authorize.html',
+                user=user,
+                grant=grant
+            ) # can add client and scopes here
     if not user and 'username' in request.form:
         username = request.form.get('username')
         user = User.query.filter_by(username=username).first()
     if request.form['confirm']:
+        # granted by resource owner
         grant_user = user
     else:
+        # denied by resource owner
         grant_user = None
     return authorization.create_authorization_response(grant_user=grant_user)
 
@@ -117,13 +112,7 @@ def issue_token():
     return authorization.create_token_response()
 
 
-@bp.route('/oauth/revoke', methods=['POST'])
-def revoke_token():
-    return authorization.create_endpoint_response('revocation')
-
-
-@bp.route('/api/me')
-@require_oauth('profile')
+@bp.route('/oauth/userinfo')
+@require_oauth('openid profile')
 def api_me():
-    user = current_token.user
-    return jsonify(id=user.id, username=user.username)
+    return jsonify(generate_user_info(current_token.user, current_token.scope))

@@ -7,31 +7,29 @@ networks:
 
 services:
 
-  api-oidc:
-    hostname: api-oidc
-    container_name: api-oidc
+  oidc-client:
+    hostname: oidc-client
+    container_name: oidc-client
     restart: always
-    build: api-oidc/
+    build: oidc-client/
     ports:
       - "3000:3000"
     volumes: 
-      - ./api-oidc:/app
+      - ./oidc-client:/app
 
-#  exchanger:
-#    hostname: exchanger
-#    container_name: exchanger
-#    restart: always
-#    build: oauth_server/
-#    environment:
-#      - FLASK_APP=app
-#      - FLASK_ENV=development
-#      - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
-#    depends_on:
-#      - flask_db
-#    ports:
-#      - "5000:5000"
+  oidc-provider:
+    hostname: oidc-provider
+    container_name: oidc-provider
+    restart: always
+    build: oidc-provider/
+    environment:
+      - AUTHLIB_INSECURE_TRANSPORT=1
+      - FLASK_ENV=development
+      - FLASK_DEBUG=true
+    ports:
+      - "5000:5000"
 #    volumes: 
-#      - ./oauth_server:/app
+#      - ./oidc-provider:/app
 
 #  flask_db:
 #    container_name: flask_db
