@@ -12,12 +12,19 @@ jobs:
         run: |
           echo "Lorem ipsum" > lorem_1.md  # create two example files
           echo "dolor sit amet" > lorem_2.md
-          mkdir documentation/output  # create output dir
+          mkdir output  # create output dir
           echo "files=$(printf '"%s" ' *.md)" > $GITHUB_OUTPUT
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-without-markdown
+          path: |
+            documentation
+            !documentation/user_stories.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=documentation/output/results.pdf ${{ steps.files_list.outputs.files }}
+          args: --output=output/user_stories.pdf ${{ steps.files_list.outputs.files }}
       - uses: actions/upload-artifact@v3
         with:
           name: output
-          path: documentation/output
+          path: output
