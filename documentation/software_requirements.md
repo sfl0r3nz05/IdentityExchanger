@@ -26,6 +26,8 @@ The Identity Exchange (IE) is an entity that acts as Broker Identity Federation 
 
 3. **Aproacch of information flow**
 
+   ![Indentity Exchange in detail](./images/IE_detail.png)
+
    1. The user discovers a relying party.
       1. The user access the RP with the intent to create an account and access services on the RP.
    2. The user creates an account on the RP and as the last step of account creation, the RP asks for access to identity information from a user through a trusted IE.
