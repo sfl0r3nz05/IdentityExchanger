@@ -2,11 +2,25 @@
 
 ## Introduction
 
-The Identity Exchange (IE) is an entity that acts as Broker Identity Federation that implement one time blind Proof of Existence (PoE) that establish that a real person is behind an account without reveling sensible user information. IE also use Proof of Attributes (PoA) to enable specific verification as part of the claims.
+The Identity Exchange (IE) is an entity that acts as Broker Identity Federation that implement one time blind Proof of Existence (PoE) that establish that a real person is behind an account without reveling sensible user information. IE also use Proof of Attributes (PoA) to enable specific verification as part of the claims. As shown in the following figure, the entities that form part of the system are:
+
+- User
+- Identity Provider
+- Identity Exchange
+- Relying Party
 
 ![Indentity Exchange](./images/IE.png)
 
 ## Functional Requirements
+
+
+
+1. **Consent banner integration**:
+
+   - The lE access entry point is the consent banner that must be previously installed in the RP.
+   - 
+
+2. qew
 
 ### Use Cases
 
