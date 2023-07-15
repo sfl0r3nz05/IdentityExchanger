@@ -6,14 +6,14 @@ stages:
 check:
   stage: check
   tags:
-    - fa5-trans-r
+    - fa-trans-r
   script:
     - echo "Minute uploaded"
 
 pandoc-pdf:
   stage: pandoc
   tags:
-    - fa5-trans-r
+    - fa-trans-r
   image:
     name: pandoc/extra
     entrypoint: ["/bin/sh", "-c"]
@@ -28,7 +28,7 @@ pandoc-pdf:
 send_email:
   stage: notify
   tags:
-    - fa5-trans-r
+    - fa-trans-r
   script:
     - curl -s --user "api:$MAILGUN_API_KEY"
        "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
