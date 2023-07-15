@@ -5,24 +5,28 @@
 The Identity Exchange (IE) is an entity that acts as Broker Identity Federation that implement one time blind Proof of Existence (PoE) that establish that a real person is behind an account without reveling sensible user information. IE also use Proof of Attributes (PoA) to enable specific verification as part of the claims. As shown in the following figure, the entities that form part of the system are:
 
 - User
-- Identity Provider
-- Identity Exchange
-- Relying Party
+- Identity Provider (IdP)
+- Identity Exchange (IE)
+- Relying Party (RP)
 
 ![Indentity Exchange](./images/IE.png)
 
 ## Functional Requirements
 
+1. **Setting up a trust chain**:
 
+    - The IE must support different RP levels of assurances.
+    - IE negotiate Identity Assurance Level and Authenticator Assurance with RP.
+    - IE negotiate Federation Assurance Level with IdP.
 
-1. **Consent banner integration**:
+2. **Integration on the consent banner**:
 
-   - The lE access entry point is the consent banner that must be previously installed in the RP.
-   - 
+   - The IE access entry point is the consent banner that must be previously installed in the RP.
+   - The user interface contained into the consent banner will directly display the IdPs supported by IE.
 
-2. qew
+3. **User Authentication**:
 
-### Use Cases
+   - The user will be authenticated from a Proof of Existence (PoE) using FIDO2.
 
 ### User Stories
 
