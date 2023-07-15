@@ -4,7 +4,7 @@
 
 The Identity Exchange (IE) is an entity that acts as Broker Identity Federation that implement one time blind Proof of Existence (PoE) that establish that a real person is behind an account without reveling sensible user information. IE also use Proof of Attributes (PoA) to enable specific verification as part of the claims.
 
-![Indentity Exchange](./documentation/images/IE.png)
+![Indentity Exchange](./images/IE.png)
 
 ## Functional Requirements
 
