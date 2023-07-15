@@ -1,0 +1,39 @@
+stages:
+  - check
+  - pandoc
+  - notify
+
+check:
+  stage: check
+  tags:
+    - fa5-trans-r
+  script:
+    - echo "Minute uploaded"
+
+pandoc-pdf:
+  stage: pandoc
+  tags:
+    - fa5-trans-r
+  image:
+    name: pandoc/extra
+    entrypoint: ["/bin/sh", "-c"]
+  script:
+    - mkdir public
+    - pandoc --template eisvogel --output=public/software_requirements.pdf documentation/software_requirements.md
+  artifacts:
+    paths:
+      - public
+    when: always
+
+send_email:
+  stage: notify
+  tags:
+    - fa5-trans-r
+  script:
+    - curl -s --user "api:$MAILGUN_API_KEY"
+       "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
+       -F from='sfigueroa@ceit.es'
+       -F to=sfigueroa@ceit.es
+       -F subject='[FA5-TRANS4M-R] Software Requirements'
+       -F text='Software Requirements'
+       -F attachment='@public/software_requirements.pdf'
