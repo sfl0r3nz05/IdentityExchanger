@@ -85,25 +85,21 @@ The Identity Exchange (IE) is an entity that acts as Broker Identity Federation 
 
 ## Non-functional Requirements
 
-- Performance: The software should respond to user actions within 2 seconds and support concurrent user access without significant performance degradation.
+- Usability: The user interface (will be displayed only within the banner) so it must be intuitive and easy to use, with clear navigation and a coherent design.
 
-- Usability: The user interface should be intuitive and user-friendly, with clear navigation and consistent design.
+- Reliability: The software, i.e., the IE should have a minimum uptime of 99% and provide error handling and data backup mechanisms.
 
-- Reliability: The software should have a minimum uptime of 99% and provide error handling and data backup mechanisms.
+- Compatibility: The software, i.e., the IE should be compatible with popular web browsers (e.g., Chrome, Firefox, Safari) and responsive across different screen sizes.
 
-- Security: User authentication should be implemented, and data should be encrypted during transmission and storage.
+- Maintainability: The software, i.e., the IE should be modular, well-documented, and allow for future updates and enhancements. A microservice based architecture should be used.
 
-- Compatibility: The software should be compatible with popular web browsers (e.g., Chrome, Firefox, Safari) and responsive across different screen sizes.
+- Encapsulation: The software, i.e., will be developed on Docker container to ensure deployment on Kubernetes.
 
-- Scalability: The software should handle a growing number of users and projects without compromising performance
-
-- Maintainability: The software should be modular, well-documented, and allow for future updates and enhancements.
+- Development methodology: Considering the *maintainability* and *encapsulation* requirements, the software development methodology will be based on a Continuous Integration and Continuous Delivery (CI/CD) framework, emphasizing security through rigorous testing, static code analysis, vulnerability analysis in containerized libraries, etc.
 
 ## System Constraints
 
-- Hardware Limitations: The software should be compatible with standard hardware configurations, including desktops, laptops, and mobile devices.
-
-- Software Dependencies: The software should be developed using a specific programming language and framework (e.g., Python and Django) and utilize a relational database (e.g., PostgreSQL).
+- Software Dependencies: The software should be developed using a specific programming language and framework (*Python* for the Backend and *React JS* for the Frontend), utilize a *Redys* database for short time storage and utilize a *PostgreSQL* relational database for long term storage. The software will respect strict compliance with OIDC and OAuth protocols, while using the official Python libraries defined by the standard documentation: https://openid.net/certified-open-id-developer-tools/.
 
 - Regulatory and Legal Requirements: The software should comply with relevant data privacy and protection regulations, such as GDPR.
 
