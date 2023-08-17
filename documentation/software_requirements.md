@@ -9,7 +9,7 @@ The Identity Exchange (IE) is an entity that acts as Broker Identity Federation 
 - Identity Exchange (IE)
 - Relying Party (RP)
 
-![Indentity Exchange](documentation/images/IE.png)
+![Indentity Exchange](./images/IE.png)
 
 ## Functional Requirements
 
@@ -28,7 +28,7 @@ The Identity Exchange (IE) is an entity that acts as Broker Identity Federation 
 
 - As shown in the following figure, the IE is internally divided into an OIDC Provider to establish communication with the RP's OIDC client and an OIDC client to establish communication with the IdP. Taking this approach into consideration, the following information flows are defined as follows:
 
-   ![Indentity Exchange in detail](documentation/images/IE_detail.png)
+   ![Indentity Exchange in detail](./images/IE_detail.png)
 
    1. The user discovers a relying party.
       1. The user access the RP with the intent to create an account and access services on the RP.
