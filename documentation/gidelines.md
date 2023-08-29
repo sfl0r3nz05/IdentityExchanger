@@ -4,7 +4,7 @@
 
 The following project aims to create a mechanism for verification of attributes, e.g. age, using national identity cards.
 
-[image](./images/PoA.png)
+![image](./images/PoA.png)
 
 ## Software Requirements
 
@@ -15,3 +15,5 @@ The following project aims to create a mechanism for verification of attributes,
    4a. The SDK for accessing Spanish government services (FNMT) is in Java, so at least 2 containers are required: 1) Backend container, 2) Spanish public service requester.
 5. CI/CD considerations must be taken into account using static code analysis tools such as SonarQube and vulnerability scanning tools such as Trivy.
 6. Kubernetes manifests will be provided for production deployment, performing proper handling of secrets.
+
+## Deliverables
