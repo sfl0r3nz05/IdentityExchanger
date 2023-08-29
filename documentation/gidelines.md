@@ -4,7 +4,7 @@
 
 The following project aims to create a mechanism for verification of attributes, e.g. age, using national identity cards. This constitutes a project similar to the one that can be used in bookmakers or gambling houses, so that a specific attribute, such as age, can be verified.
 
-![image](./images/PoA.png)
+![image](./documentation/images/PoA.png)
 
 ## User stories
 
@@ -27,3 +27,7 @@ The following project aims to create a mechanism for verification of attributes,
 1. Design: Flowcharts, UML diagrams.
 2. Implementation: Source Code, Docker Container, Kubernetes Manifests and CI/CD pipeline.
 3. Code security verification.
+
+## Resources
+
+1. [Source Code Java SDK supported by FNMT](https://www.ordenacionjuego.es/es/Kit-descarga-DNIe)
