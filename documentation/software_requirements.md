@@ -2,6 +2,21 @@
 
 ## Introduction
 
+The Internet provides access to an ever increasing number of services, many of which require its users to have an account with credentials. This is a considerable cognitive burden for users and leads to password reuse and other poor security practices. Delegated authentication protocols offer a way out of this dilemma. These protocols allow a user to use her account at an Identity Provider (IdP) to log in to other services, called Relying Party (RP). This provides users with single sign-on functionality, where one account can be used to log in to many different services. The most widely used delegated authentication protocol today is OpenID Connect, supported by identity providers like Google and Microsoft. Unfortunately OpenID Connect is not privacy-friendly: the identity provider learns with each use which relying party the user logs in to. This necessitates a high degree of trust in the identity provider, and is especially problematic when the relying parties’ identity reveals sensitive information. This problem is extensible to other identity protocols such as SAML. Therefore, there is a need to remodel the flow of identity transactions to cater to both anonymity and accountability considerations. The starting point will be the study of the identity federation process.
+
+## Identity Federation
+
+In a federation protocol, a three-party relationship is formed between the subscriber, the IdP, and RP. Depending on the specifics of the protocol, different information passes between the participants at different times. The subscriber communicates with both the IdP and the RP, usually through a browser. The RP and the IdP communicate with each other in two ways:
+
+- The front channel, through redirects involving the subscriber; or
+- The back channel, through a direct connection between the RP and IdP, not involving the subscriber.
+
+The subscriber authenticates to the IdP and the result of that authentication event is asserted to the RP across the network. In this transaction, the IdP acts as the verifier for the credential. The IdP can also make attribute statements about the subscriber as part of this process. These attributes and authentication event information are carried to the RP through the use of an assertion. There are several federation models: (1) Manual resitration, (2) Dynamic Registration, (3) Federation Authorities and (4) Proxied Federation. For the value, from the privacy and anonymization perspective, the Proxied Federation will be studied below.
+
+![Federation](documentation/images/federation.png)
+
+IdPs that provide authentication services and RPs that consume those services are known as members of a federation. From an IdP’s perspective, the federation consists of the RPs that it serves. From an RP’s perspective, the federation consists of the IdPs that it uses. 
+
 The Identity Exchange (IE) is an entity that acts as Broker Identity Federation that implement one time blind Proof of Existence (PoE) that establish that a real person is behind an account without reveling sensible user information. IE also use Proof of Attributes (PoA) to enable specific verification as part of the claims. As shown in the following figure, the entities that form part of the system are:
 
 - User
