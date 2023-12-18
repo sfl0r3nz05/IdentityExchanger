@@ -1,19 +1,10 @@
 stages:
-  - check
-  - pandoc
-  - notify
+  - build-doc
 
-check:
-  stage: check
+build-doc:
+  stage: build-doc
   tags:
-    - fa-trans-r
-  script:
-    - echo "Minute uploaded"
-
-pandoc-pdf:
-  stage: pandoc
-  tags:
-    - fa-trans-r
+    - embedded
   image:
     name: pandoc/extra
     entrypoint: ["/bin/sh", "-c"]
@@ -24,16 +15,3 @@ pandoc-pdf:
     paths:
       - public
     when: always
-
-send_email:
-  stage: notify
-  tags:
-    - fa-trans-r
-  script:
-    - curl -s --user "api:$MAILGUN_API_KEY"
-       "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
-       -F from='sfigueroa@ceit.es'
-       -F to=sfigueroa@ceit.es
-       -F subject='[FA5-TRANS4M-R] Software Requirements'
-       -F text='Software Requirements'
-       -F attachment='@public/software_requirements.pdf'
