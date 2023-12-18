@@ -30,7 +30,13 @@ One of the main properties of the Identity Federation Proxy is blinding, which i
 
 #### Blinding in Proxied Federation
 
+While some proxy structures — typically those that exist primarily to simplify integration — may not offer additional subscriber privacy protection, others offer varying levels of privacy to the subscriber through a range of blinding technologies. Privacy policies may dictate appropriate use of the subscriber attributes and authentication transaction data (e.g., identities of the ultimate IdP and RP) by the IdP, RP, and the federation proxy. Technical means such as blinding can increase effectiveness of these policies by making the data more difficult to obtain. As the level of blinding increases, the technical and operational implementation complexity may increase. Proxies need to map transactions to the appropriate parties on either side as well as manage the keys for all parties in the transaction.
 
+Even with the use of blinding technologies, a blinded party may still infer protected subscriber information through released attribute data or metadata, such as by analysis of timestamps, attribute bundle sizes, or attribute signer information. The IdP could consider additional privacy enhancing approaches to reduce the risk of revealing identifying information of the entities participating in the federation.
+
+The following table illustrates a spectrum of blinding implementations used in proxied federation. This table is intended to be illustrative, and is neither comprehensive nor technology specific.
+
+![Federation Proxy](documentation/images/proxy_comparison.png)
 
 ## Our solution
 
