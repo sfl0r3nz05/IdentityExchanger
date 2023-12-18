@@ -13,7 +13,26 @@ In a federation protocol, a three-party relationship is formed between the subsc
 
 The subscriber authenticates to the IdP and the result of that authentication event is asserted to the RP across the network. In this transaction, the IdP acts as the verifier for the credential. The IdP can also make attribute statements about the subscriber as part of this process. These attributes and authentication event information are carried to the RP through the use of an assertion. There are several federation models: (1) Manual resitration, (2) Dynamic Registration, (3) Federation Authorities and (4) Proxied Federation. For the value, from the privacy and anonymization perspective, the Proxied Federation will be studied below.
 
-<img src="documentation/images/federation.png" alt="Federation" style="width:200px;"/>
+![Federation](documentation/images/federation.png){width: 50%}
+
+### Proxied Federation
+
+In a proxied federation, communication between the IdP and the RP is intermediated in a way that prevents direct communication between the two parties. There are multiple methods to achieve this effect. Common configurations include:
+
+- A third party that acts as a federation proxy (or broker)
+- A network of nodes that distributes the communications
+
+Where proxies are used, they function as an IdP on one side and an RP on the other. Therefore, all normative requirements that apply to IdPs and RPs SHALL apply to proxies in their respective roles.
+
+![Federation Proxy](documentation/images/federation_proxy.png){width: 50%}
+
+One of the main properties of the Identity Federation Proxy is blinding, which is discussed below.
+
+#### Blinding in Proxied Federation
+
+
+
+## Our solution
 
 IdPs that provide authentication services and RPs that consume those services are known as members of a federation. From an IdP’s perspective, the federation consists of the RPs that it serves. From an RP’s perspective, the federation consists of the IdPs that it uses. 
 
@@ -24,7 +43,7 @@ The Identity Exchange (IE) is an entity that acts as Broker Identity Federation 
 - Identity Exchange (IE)
 - Relying Party (RP)
 
-![Indentity Exchange](./images/IE.png)
+![Indentity Exchange](documentation/images/images/IE.png)
 
 ## Functional Requirements
 
