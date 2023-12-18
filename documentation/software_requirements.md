@@ -13,7 +13,7 @@ In a federation protocol, a three-party relationship is formed between the subsc
 
 The subscriber authenticates to the IdP and the result of that authentication event is asserted to the RP across the network. In this transaction, the IdP acts as the verifier for the credential. The IdP can also make attribute statements about the subscriber as part of this process. These attributes and authentication event information are carried to the RP through the use of an assertion. There are several federation models: (1) Manual resitration, (2) Dynamic Registration, (3) Federation Authorities and (4) Proxied Federation. For the value, from the privacy and anonymization perspective, the Proxied Federation will be studied below.
 
-![Federation](documentation/images/federation.png)
+<img src="documentation/images/federation.png" alt="Federation" style="width:200px;"/>
 
 IdPs that provide authentication services and RPs that consume those services are known as members of a federation. From an IdP’s perspective, the federation consists of the RPs that it serves. From an RP’s perspective, the federation consists of the IdPs that it uses. 
 
