@@ -49,7 +49,7 @@ The Identity Exchange (IE) is an entity that acts as Broker Identity Federation 
 - Identity Exchange (IE)
 - Relying Party (RP)
 
-![Indentity Exchange](documentation/images/images/IE.png)
+![Indentity Exchange](documentation/images/IE.png)
 
 ## Functional Requirements
 
